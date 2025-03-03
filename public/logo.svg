@@ -1,0 +1,45 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Brain circuit background -->
+  <path class="circuit" d="M60 10 A50 50 0 1 0 60 110 A50 50 0 1 0 60 10" fill="none" stroke="#2563eb" stroke-width="2">
+    <animate attributeName="stroke-dasharray" from="0,1000" to="314,0" dur="2s" fill="freeze" />
+  </path>
+  
+  <!-- AI nodes -->
+  <g class="nodes">
+    <circle cx="40" cy="45" r="4" fill="#2563eb">
+      <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="80" cy="45" r="4" fill="#2563eb">
+      <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+    </circle>
+    <circle cx="60" cy="75" r="4" fill="#2563eb">
+      <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+  </g>
+
+  <!-- Connection lines -->
+  <g class="connections" stroke="#2563eb" stroke-width="2">
+    <line x1="40" y1="45" x2="80" y2="45">
+      <animate attributeName="stroke-dasharray" from="0,100" to="40,0" dur="1s" fill="freeze" />
+    </line>
+    <line x1="40" y1="45" x2="60" y2="75">
+      <animate attributeName="stroke-dasharray" from="0,100" to="35,0" dur="1s" fill="freeze" begin="0.3s"/>
+    </line>
+    <line x1="80" y1="45" x2="60" y2="75">
+      <animate attributeName="stroke-dasharray" from="0,100" to="35,0" dur="1s" fill="freeze" begin="0.6s"/>
+    </line>
+  </g>
+
+  <!-- Human silhouette -->
+  <path class="human" d="M60 35 A5 5 0 1 0 60 45 A5 5 0 1 0 60 35 M50 55 C50 45 70 45 70 55 L65 85 L55 85 Z" fill="#0f172a">
+    <animate attributeName="opacity" values="0;1" dur="1s" fill="freeze" begin="1s"/>
+  </path>
+
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .human { fill: #e2e8f0; }
+      .circuit, .connections { stroke: #60a5fa; }
+      .nodes circle { fill: #60a5fa; }
+    }
+  </style>
+</svg>
