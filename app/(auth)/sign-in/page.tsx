@@ -1,22 +1,40 @@
 "use client";
 
+import { AuthContext } from "@/context/AuthContext";
+import { api } from "@/convex/_generated/api";
 import { GetAuthUserData } from "@/services/GlobalAPI_Services";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useMutation } from "convex/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 
 export default function SignIn() {
 
+  const CreateUser = useMutation(api.users.CreateUser);
+  const router = useRouter()
+  const {user,setUser}=useContext(AuthContext)
     const googleLogin = useGoogleLogin({
         onSuccess: async (tokenResponse)=>{
-            console.log(tokenResponse);
              if(typeof window!==undefined){
                 localStorage.setItem('token',tokenResponse.access_token)
             }
-            const user = GetAuthUserData(tokenResponse.access_token)
+            const user =await GetAuthUserData(tokenResponse.access_token)
 
             //save the user info 
+
+           const result = await CreateUser({
+            name:user?.name,
+            email:user?.email,
+            picture:user?.picture,
+           })
+
+          setUser(result)
+          router.replace('/ai-assistants')
+
+
             
         },
     onError: (errorResponse)=>{

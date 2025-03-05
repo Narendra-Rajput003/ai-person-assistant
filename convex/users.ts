@@ -1,4 +1,4 @@
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 
@@ -14,29 +14,52 @@ export const CreateUser = mutation({
        try {
 
          //if user already exis
-         const existingUser = await ctx.db
+         const user = await ctx.db
          .query('users')
          .filter(q => q.eq(q.field('email'), args.email))
-         .first(); // Execute the query and get the first result
-
-     if (existingUser) {
-         return existingUser._id; // Access the `_id` property of the 
-     }
+         .collect();
 
 
-        const userId = await ctx.db.insert('users',{
-            name:args.name,
-            email:args.email,
-            picture:args.picture,
-            credits:'6000'
-        })
 
-        return userId;
-       
+        if(user.length==0){
+           
+            const data ={
+                name:args.name,
+                email:args.email,
+                picture:args.picture,
+                credits:6000,
+              
+            }
+
+            const result = await ctx.db.insert('users',data);
+            return data;
+        }
+
+        return user[0];
+        
+
         
        } catch (error) {
         console.error('User creation failed:', error);
         throw new Error('Failed to create user');
        }
+    }
+})
+
+
+export const GetUserInfo=query({
+    args:{
+        email:v.string(),
+    },
+    handler:async(ctx,args)=>{
+            try {
+               const user = await ctx.db.query('users')
+               .filter(q=>q.eq(q.field('email'),args.email))
+               .collect()
+               return user[0];
+            } catch (error) {
+                throw new Error("Error in GetUserInfo")
+                
+            }
     }
 })
