@@ -1,55 +1,42 @@
 import AssistantSetting from "./_components/AssistantSetting";
 import AssitantsList from "./_components/AssitantsList";
+import ChatUI from "./_components/ChatUI";
 
 export default function WorkSpace() {
     return (
-        <div className="min-h-screen w-full bg-background">
+        <div className="min-h-screen w-full bg-background transition-colors duration-300 animate-fade-in">
             {/* Main container with max width and padding */}
-            <div className="mx-auto max-w-[2000px] h-[calc(100vh-1rem)] p-2 sm:p-4">
+            <div className="mx-auto max-w-[2000px] h-[calc(100vh-1rem)] p-2 sm:p-4 animate-slide-up">
                 {/* Grid layout with responsive columns */}
-                <div className="grid h-full grid-cols-1 md:grid-cols-12 gap-4 rounded-xl">
-                    {/* Sidebar - Assistants List */}
-                    <div className="hidden md:block md:col-span-3 lg:col-span-2 bg-card rounded-xl shadow-sm border border-border">
+                <div className="grid h-full grid-cols-1 md:grid-cols-12 gap-4 rounded-xl transition-all duration-300">
+                    {/* Assistants List Panel - with smooth reveal animation */}
+                    <div className="hidden md:block md:col-span-3 lg:col-span-2 bg-card rounded-xl 
+                        shadow-lg border border-border/50 backdrop-blur-sm
+                        transition-all duration-300 ease-in-out
+                        hover:shadow-xl hover:border-border
+                        animate-slide-left [animation-delay:200ms]
+                        overflow-hidden">
                         <AssitantsList />
                     </div>
 
-                    {/* Main Chat Area */}
-                    <div className="col-span-1 md:col-span-9 lg:col-span-7 bg-card rounded-xl shadow-sm border border-border p-4">
-                        <div className="flex flex-col h-full">
-                            {/* Chat Header */}
-                            <div className="border-b border-border pb-4">
-                                <h2 className="text-xl font-semibold text-foreground">Chat UI</h2>
-                            </div>
-
-                            {/* Chat Messages Area */}
-                            <div className="flex-grow overflow-y-auto my-4">
-                                {/* Chat messages will go here */}
-                            </div>
-
-                            {/* Chat Input Area */}
-                            <div className="border-t border-border pt-4">
-                                <div className="flex items-center gap-2 bg-background rounded-lg p-2">
-                                    <input 
-                                        type="text" 
-                                        placeholder="Type your message..." 
-                                        className="flex-1 bg-transparent border-none focus:outline-none text-foreground"
-                                    />
-                                    <button className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-                                        Send
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                    {/* Main Chat Area - with scale animation */}
+                    <div className="col-span-1 md:col-span-6 lg:col-span-7 
+                        transition-transform duration-300 ease-in-out
+                        animate-scale-up [animation-delay:400ms]">
+                        <ChatUI />
                     </div>
 
-                    {/* Settings Panel */}
-                    
-                       <AssistantSetting/>
-                
+                    {/* Settings Panel - with slide-in animation */}
+                    <div className="hidden md:block md:col-span-3 lg:col-span-3 bg-card rounded-xl 
+                        shadow-lg border border-border/50 backdrop-blur-sm
+                        transition-all duration-300 ease-in-out
+                        hover:shadow-xl hover:border-border
+                        animate-slide-right [animation-delay:600ms]
+                        overflow-hidden">
+                        <AssistantSetting />
+                    </div>
                 </div>
             </div>
-            
         </div>
-    
     );
 }

@@ -63,3 +63,17 @@ export const GetUserInfo=query({
             }
     }
 })
+
+
+export const updateTokens =mutation({
+    args:{
+        credits:v.number(),
+        uid:v.id('users')
+    },
+    handler:async(ctx,args)=>{
+        const result = await ctx.db.patch(args.uid,{
+            credits:args.credits
+        })
+        return result;
+    }
+})

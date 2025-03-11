@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Personal Assistant Platform 🤖
 
-## Getting Started
+![AI Personal Assistant Logo](public/logo.svg)
 
-First, run the development server:
+A powerful AI assistant platform that connects users with specialized AI agents for various tasks - from fitness coaching to code writing. Built with Next.js 13, TypeScript, and integrated with multiple AI models through Eden AI.
 
+## 🌟 Features
+
+- **Multiple AI Assistants**: Specialized AI agents for different domains:
+  - Fitness Coach (Jack) 💪
+  - Grammar Fixer (Emma) ✍️
+  - Email Writer (Olivia) 📩
+  - YouTube Script Writer (Liam) 🎬
+  - Code Writer (Harry) 💻
+
+- **AI Model Integration**: Support for multiple AI models:
+  - Google Gemini 2.0
+  - OpenAI GPT-3.5 Turbo
+  - Mistral Large
+  - Anthropic Claude
+
+- **User Features**:
+  - Google Authentication
+  - Token-based credit system
+  - Premium subscription support
+  - Real-time chat interface
+  - Theme customization
+
+## 🚀 Tech Stack
+
+- **Frontend**:
+  - Next.js 15.2
+  - React 19
+  - TypeScript
+  - Tailwind CSS
+  - Radix UI Components
+  - Lucide Icons
+
+- **Backend**:
+  - Convex Database
+  - Eden AI API Integration
+  - Google OAuth
+
+- **State Management**:
+  - React Context
+  - Convex Real-time Subscriptions
+
+## 🛠️ Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/ai-personal-assistant.git
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables:
+```env
+NEXT_PUBLIC_CONVEX_URL=your_convex_url
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
+EDEN_AI_API_KEY=your_eden_ai_key
+```
+
+4. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📝 Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `NEXT_PUBLIC_CONVEX_URL`: Convex database URL
+- `NEXT_PUBLIC_GOOGLE_CLIENT_ID`: Google OAuth client ID
+- `EDEN_AI_API_KEY`: Eden AI API key for AI model integration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎯 Usage
 
-## Learn More
+1. Sign in with Google account
+2. Select an AI assistant based on your needs
+3. Start chatting and get AI-powered responses
+4. Monitor token usage in your profile
+5. Upgrade to premium for additional features
 
-To learn more about Next.js, take a look at the following resources:
+## 📄 License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+MIT License - see the [LICENSE](LICENSE) file for details
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🤝 Contributing
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Please feel free to submit a Pull Request.

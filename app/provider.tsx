@@ -22,9 +22,8 @@ export function Providers({
                
             <ThemeProvider 
                 attribute="class" 
-                defaultTheme="light"
-                forcedTheme="light"
-                enableSystem={false}
+                defaultTheme="system"
+                enableSystem
             >
                 {children}
             </ThemeProvider>

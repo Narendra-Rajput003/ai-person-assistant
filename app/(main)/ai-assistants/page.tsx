@@ -22,6 +22,7 @@ export type ASSISTANT ={
     instruction: string;
     userInstruction: string;
     sampleQuestions: string[];
+    aiModelId: string;
 }
 
 export default function AIAssistants() {
@@ -77,7 +78,7 @@ export default function AIAssistants() {
     }
 
 
-    useEffect(()=>{
+    useEffect(()=>{   
         user&&GetUserAssistans()
     },[user])
 

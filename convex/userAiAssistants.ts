@@ -49,7 +49,9 @@ export const GetAiAssistants = query({
 
             const assistans = await ctx.db.query('userAiAssistants')
             .filter(q=>q.eq(q.field('uid'),args.uid))
+            .order('desc')
             .collect()
+            
             return assistans;
             
         } catch (error) {
@@ -83,3 +85,15 @@ export const UpdateUserAiAssistants = mutation({
 })
 
 
+export const deleteAiAssistants = mutation({
+    args: {
+        id: v.id('userAiAssistants'),
+    },
+    handler: async (ctx, args) => {
+        try {
+            await ctx.db.delete(args.id);
+        } catch (error) {
+            throw new Error("Error in deleteAiAssistants");
+        }
+    }
+})

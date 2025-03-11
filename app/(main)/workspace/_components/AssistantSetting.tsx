@@ -16,12 +16,16 @@ import { Button } from '@/components/ui/button'
 import { Loader2Icon, Save, Trash } from 'lucide-react'
 import { useMutation } from 'convex/react'
 import { api } from '@/convex/_generated/api'
+import { toast } from 'sonner'
+import ConfirmationAlert from '../ConfirmationAlert'
+import { useRouter } from 'next/navigation'
 
 function AssistantSetting() {
-
+    const router = useRouter()
     const { assistant, setAssistant } = useContext(AssistantContext)
     const updateAiAssistant = useMutation(api.userAiAssistants.UpdateUserAiAssistants)
-    const [loading , setLoading] = React.useState(false)
+    const deleteAiAssistant = useMutation(api.userAiAssistants.deleteAiAssistants)
+    const [loading, setLoading] = React.useState(false)
 
 
     const onHandleInputChange = (feild:string,value:string)=>{
@@ -29,6 +33,7 @@ function AssistantSetting() {
             ...prev,
             [feild]:value
         }))
+        
     }
 
     const OnSave = async()=>{
@@ -38,9 +43,26 @@ function AssistantSetting() {
             userInstruction:assistant?.userInstruction,
             aiModelId:assistant?.aiModelId,
         })
+        toast('Save!')
         setLoading(false)
         
     }
+
+    const handleDelete = async () => {
+        setLoading(true)
+        try {
+            await deleteAiAssistant({ id: assistant._id })
+            setAssistant(null) // Clear the current assistant from context
+            toast.success('Assistant deleted successfully')
+            router.refresh() // This will trigger a re-render of the page with fresh data
+
+        } catch (error) {
+            toast.error('Failed to delete assistant')
+        }
+        setLoading(false)
+    }
+
+    
     
 
     return (
@@ -75,7 +97,7 @@ function AssistantSetting() {
                             <SelectValue placeholder="Choose AI Model" />
                         </SelectTrigger>
                         <SelectContent>
-                            {AiModelOptions.map((option) => (
+                            {AiModelOptions?.map((option) => (
                                 <SelectItem 
                                     key={option.id} 
                                     value={option.edenAi}
@@ -106,22 +128,20 @@ function AssistantSetting() {
 
             <div className="absolute bottom-10">
                 <div className="flex items-center gap-3 justify-end">
-                    <Button 
-                        variant="destructive" 
-                        size="sm"
-                        className="gap-2"
-                        disabled={loading}
-                    >
-                        <Trash className="w-4 h-4" />
-                        Delete
-                    </Button>
+                    <ConfirmationAlert OnDelete={handleDelete}>
+                        {/* Remove the Button wrapper since AlertDialogTrigger will render as a button */}
+                        <div className="flex items-center gap-2">
+                            <Trash className="w-4 h-4" />
+                            Delete
+                        </div>
+                    </ConfirmationAlert>
                     <Button 
                         size="sm"
                         className="gap-2"
                         onClick={OnSave}
                         disabled={loading}
                     >
-                        {loading?<Loader2Icon className='animate-spin'/>:<Save className="w-4 h-4" />}
+                        {loading ? <Loader2Icon className='animate-spin'/> : <Save className="w-4 h-4" />}
                         Save Changes
                     </Button>
                 </div>
